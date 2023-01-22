@@ -30,7 +30,7 @@ def get_redoc_html(
     </head>
     <body>
         <div id="redoc-container"></div>
-        <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"> </script>
+         <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.55/bundles/redoc.standalone.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/gh/wll8/redoc-try@1.4.1/dist/try.js"></script>
 
         <script type="text/javascript">
@@ -38,8 +38,8 @@ def get_redoc_html(
                 openApi: `{openapi_url}`,
                 redocOptions: {{scrollYOffset: 50}},
                 logo: {{
-                    url: 'https://redocly.github.io/redoc/petstore-logo.png',
-                    altText: 'Petstore logo'
+                    url: 'https://github.com/rtiwariops/cloudfast/blob/main/assets/flc_design20230122107992.png',
+                    altText: 'CloudFast logo'
                 }}
             }})
         </script>
