@@ -1,6 +1,6 @@
 from starlette.responses import HTMLResponse
 from fastapi import FastAPI
-from fastapi.openapi.docs import get_redoc_html
+from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
 
 def get_redoc_html(
     *,
@@ -32,7 +32,6 @@ def get_redoc_html(
         <div id="redoc-container"></div>
          <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.55/bundles/redoc.standalone.min.js"> </script>
         <script src="https://cdn.jsdelivr.net/gh/wll8/redoc-try@1.4.1/dist/try.js"></script>
-
         <script type="text/javascript">
             initTry({{
                 openApi: `{openapi_url}`,

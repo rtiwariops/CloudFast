@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 import boto3
+import botocore
 import os
 import yaml
 
@@ -63,11 +64,15 @@ async def delete_vpc(vpc_id: str):
                                     region_name=region_name)
             try:
                 ec2_client.delete_vpc(VpcId=vpc_id)
-                return {"message": f"VPC {vpc_id} deleted successfully."}
-            except Exception as e:
-                raise HTTPException(status_code=500, detail=str(e))
+                return {"message": f"VPC {vpc_id} deleted successfully.", "error_code": 200}
+            except botocore.exceptions.ClientError as e:
+                if e.response['Error']['Code'] == 'InvalidVpcID.NotFound':
+                    raise HTTPException(status_code=404, detail="VPC not found")
+                else:
+                    raise HTTPException(status_code=500, detail=str(e))
     except FileNotFoundError:
         raise HTTPException(status_code=404, detail="config.yml file not found")
     except KeyError as e:
         raise HTTPException(status_code=400, detail=f"{e} env variable is not set.")
+
 
