@@ -3,7 +3,7 @@ openapi: 3.0.2
 info:
   title: Cloud Fast
   version: 0.1.0
-
+  description: This is a CloudFast API documentation.
 x-tagGroups:
   - name: Network
     tags:
@@ -12,8 +12,9 @@ x-tagGroups:
   - name: User Management
     tags:
       - user
-info:
-  description: | This is a CloudFast API documentation |
+externalDocs:
+  description: Find out how to create Github repo for your OpenAPI spec.
+  url: "https://github.com/rtiwariops/cloudfast"
 paths:
   "/create_vpc":
     post:

@@ -35,7 +35,7 @@ def get_redoc_html(
             <script type="text/javascript">
             (function() {{
             Redoc.init(
-                "https://pointnet.github.io/redoc-editor/openapi.yaml",
+                "https://github.com/rtiwariops/cloudfast/blob/main/openapi.yaml",
                 {{
                 "untrustedSpec" : true
                 }},
