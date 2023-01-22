@@ -37,6 +37,10 @@ def get_redoc_html(
             initTry({{
                 openApi: `{openapi_url}`,
                 redocOptions: {{scrollYOffset: 50}},
+                logo: {{
+                    url: 'https://redocly.github.io/redoc/petstore-logo.png',
+                    altText: 'Petstore logo'
+                }}
             }})
         </script>
     </body>
@@ -49,4 +53,5 @@ def setup_redoc(app):
     async def redoc_try_it_out() -> HTMLResponse:  
         title = "CloudFast"
         version = "1.01"
+        
         return get_redoc_html(openapi_url=app.openapi_url, title=title, version=version)
