@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from docs.redoc import setup_redoc
-from modules.vpc import router as vpc_router
+from modules.vpc.vpc import router as vpc_router
 import uvicorn
 
 from fastapi import FastAPI
@@ -31,5 +31,5 @@ app.openapi = custom_openapi
 
     
 if __name__ == '__main__':
-    uvicorn.run("vpc:app", host="0.0.0.0", port=5000, reload=True, workers=2)
+    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True, workers=2)
 

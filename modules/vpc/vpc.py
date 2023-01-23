@@ -17,12 +17,12 @@ class VpcNotFound(BaseModel):
                                                 500: {"model": VpcNotFound}})
 async def create_vpc():
     try:
-        with open("config.yml") as f:
+        with open("vpc.yml") as f:
             config = yaml.safe_load(f)
-            cidr_block = config["cidr_block"]
-            vpc_name = config["vpc_name"]
-            cloud_provider = config["cloud_provider"]
-            if cloud_provider == "aws":
+            cloud_provider = config["provider"]
+            vpc_name = config["vars"]["vpc_name"]
+            cidr_block = config["vars"]["cidr_block"]
+            if cloud_provider == "AWS":
                 access_key_id = os.environ['AWS_ACCESS_KEY_ID']
                 secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']
                 region_name = os.environ['AWS_REGION']
@@ -47,7 +47,7 @@ async def create_vpc():
             except Exception as e:
                 raise HTTPException(status_code=500, detail=str(e))
     except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="config.yml file not found")
+        raise HTTPException(status_code=404, detail="vpc.yml file not found")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except NotImplementedError as e:
@@ -59,11 +59,11 @@ async def create_vpc():
                                                 500: {"model": VpcNotFound}})
 async def delete_vpc(vpc_id: str):
     try:
-        with open("config.yml") as f:
+        with open("vpc.yml") as f:
             config = yaml.safe_load(f)
-        cloud_provider = config["cloud_provider"]
+        cloud_provider = config["provider"]
 
-        if cloud_provider == "aws":
+        if cloud_provider == "AWS":
             access_key_id = os.environ['AWS_ACCESS_KEY_ID']
             secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']
             region_name = os.environ['AWS_REGION']
