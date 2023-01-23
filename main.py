@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from docs.redoc import setup_redoc
 from modules.vpc.vpc import router as vpc_router
+import os
 import uvicorn
 
 from fastapi import FastAPI
@@ -20,7 +21,7 @@ def custom_openapi():
         routes=app.routes,
     )
     openapi_schema["info"]["x-logo"] = {
-        "url": "./assets/flc_design20230122107992.png",
+        "url": os.path.normpath(os.getcwd() + "/assets/flc_design20230122107992.png"),
         "backgroundColor": "#FFFFFF"
     }
     app.openapi_schema = openapi_schema
