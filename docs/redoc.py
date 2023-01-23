@@ -7,6 +7,8 @@ def get_redoc_html(
     openapi_url: str,
     title: str,
     version: str,
+    redoc_js_url: str,
+    logo: str,
     redoc_favicon_url: str = "https://fastapi.tiangolo.com/img/favicon.png",
     with_google_fonts: bool = True,
 ) -> HTMLResponse:
@@ -35,11 +37,7 @@ def get_redoc_html(
         <script type="text/javascript">
             initTry({{
                 openApi: `{openapi_url}`,
-                redocOptions: {{scrollYOffset: 50}},
-                logo: {{
-                    url: 'https://github.com/rtiwariops/cloudfast/blob/main/assets/flc_design20230122107992.png',
-                    altText: 'CloudFast logo'
-                }}
+                redocOptions: {{scrollYOffset: 50}}
             }})
         </script>
     </body>
@@ -47,10 +45,16 @@ def get_redoc_html(
     """
     return HTMLResponse(html)
 
+# def setup_redoc(app):
+#     @app.get("/doc", include_in_schema=False)  
+#     async def redoc_try_it_out() -> HTMLResponse:  
+#         title = "CloudFast"
+#         version = "1.01"
+        
+#         return get_redoc_html(openapi_url=app.openapi_url, title=title, version=version)
 def setup_redoc(app):
     @app.get("/doc", include_in_schema=False)  
-    async def redoc_try_it_out() -> HTMLResponse:  
-        title = "CloudFast"
-        version = "1.01"
-        
-        return get_redoc_html(openapi_url=app.openapi_url, title=title, version=version)
+    async def redoc_try_it_out():
+        return get_redoc_html(
+            openapi_url=app.openapi_url, title = "CloudFast", version="1.01", logo="https://github.com/rtiwariops/cloudfast/blob/main/assets/flc_design20230122107992.png", redoc_js_url="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"
+        )

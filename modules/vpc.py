@@ -1,12 +1,20 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.openapi import docs
 import boto3
 import botocore
 import os
+from pydantic import BaseModel
 import yaml
 
 router = APIRouter()
 
-@router.post("/create_vpc")
+class VpcNotFound(BaseModel):
+    message: str
+    error_code: int
+
+@router.post("/create_vpc", responses={200: {"model": VpcNotFound},
+                                                404: {"model": VpcNotFound},
+                                                500: {"model": VpcNotFound}})
 async def create_vpc():
     try:
         with open("config.yml") as f:
@@ -45,8 +53,10 @@ async def create_vpc():
     except NotImplementedError as e:
         raise HTTPException(status_code=501, detail=str(e))
 
-    
-@router.delete("/delete_vpc/{vpc_id}")
+
+@router.delete("/delete_vpc/{vpc_id}", responses={200: {"model": VpcNotFound},
+                                                404: {"model": VpcNotFound},
+                                                500: {"model": VpcNotFound}})
 async def delete_vpc(vpc_id: str):
     try:
         with open("config.yml") as f:
