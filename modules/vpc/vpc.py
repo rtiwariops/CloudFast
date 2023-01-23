@@ -17,11 +17,11 @@ class VpcNotFound(BaseModel):
                                                 500: {"model": VpcNotFound}})
 async def create_vpc():
     try:
-        with open("vpc.yml") as f:
+        with open(os.path.normpath(os.getcwd() + "/modules/vpc/vpc.yml")) as f:
             config = yaml.safe_load(f)
-            cloud_provider = config["provider"]
-            vpc_name = config["vars"]["vpc_name"]
-            cidr_block = config["vars"]["cidr_block"]
+            cloud_provider = config["vpc_config"]["provider"]
+            vpc_name = config["vpc_config"]["vars"]["vpc_name"]
+            cidr_block = config["vpc_config"]["vars"]["cidr_block"]
             if cloud_provider == "AWS":
                 access_key_id = os.environ['AWS_ACCESS_KEY_ID']
                 secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']
@@ -46,7 +46,10 @@ async def create_vpc():
                 return {"vpc_id": vpc_id}
             except Exception as e:
                 raise HTTPException(status_code=500, detail=str(e))
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        print(e)
+        print(os.getcwd())
+        print(os.path.normpath(os.getcwd() + "/module/vpc/vpc.yml"))
         raise HTTPException(status_code=404, detail="vpc.yml file not found")
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -59,10 +62,9 @@ async def create_vpc():
                                                 500: {"model": VpcNotFound}})
 async def delete_vpc(vpc_id: str):
     try:
-        with open("vpc.yml") as f:
+        with open(os.path.normpath(os.getcwd() + "/modules/vpc/vpc.yml")) as f:
             config = yaml.safe_load(f)
-        cloud_provider = config["provider"]
-
+            cloud_provider = config["vpc_config"]["provider"]
         if cloud_provider == "AWS":
             access_key_id = os.environ['AWS_ACCESS_KEY_ID']
             secret_access_key = os.environ['AWS_SECRET_ACCESS_KEY']

@@ -1,12 +1,10 @@
----
-- name: install VPC on cloud
+vpc_config:
   provider: AWS
   vars:
-    vpc_name: "10.0.0.0/16" 
-    cidr_block: "myVPC"
+    vpc_name: myVPC
+    cidr_block: 10.0.0.0/16
   tasks:
-  - name: install VPC
-    options:
-      name: {{vpc_name}}
-      cidr_block: {{cidr_block}}   
-  
+    - name: install VPC
+      options:
+        name: "{{ vpc_name }}"
+        cidr_block: "{{ cidr_block }}"
