@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 from docs.redoc import setup_redoc
 from modules.vpc.vpc import router as vpc_router
+from modules.subnets.subnets import router as subnet_router
 import os
 import uvicorn
 
@@ -10,6 +11,7 @@ from fastapi import FastAPI
 app = FastAPI(redoc_url=None)
 setup_redoc(app)
 app.include_router(vpc_router)
+app.include_router(subnet_router)
 
 def custom_openapi():
     if app.openapi_schema:
