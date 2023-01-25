@@ -19,3 +19,25 @@ Automate repetitive tasks: The framework can automate repetitive tasks such as c
 ```
 git clone https://github.com/rtiwariops/CloudFast.git
 ```
+
+2. Change Directory.
+
+```
+cd CloudFast
+```
+
+3. Run the following script. (Make sure to change port in run.sh for any port conflicts)
+
+```
+./run.sh
+```
+
+4. Open the web URL.
+
+```
+http://localhost:5000/doc
+```
+
+5. You will see the following API documentation.
+
+![alt text](./assets/sc.png)
