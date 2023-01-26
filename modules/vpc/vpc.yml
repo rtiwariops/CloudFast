@@ -2,7 +2,7 @@ vpc_config:
   provider: AWS
   vars:
     vpc_name: myVPC
-    cidr_block: 10.0.0.0/16
+    cidr_block: 10.16.0.0/16
   tasks:
     - name: install VPC
       options:
