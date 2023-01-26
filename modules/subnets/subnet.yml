@@ -1,0 +1,18 @@
+vpc_config:
+  provider: AWS
+  vars:
+    vpc_name: myVPC
+    cidr_block: 10.16.0.0/16
+    subnet_cidr_blocks:
+      - 10.16.16.0/20
+      - 10.16.80.0/20
+      - 10.16.144.0/20
+  tasks:
+    - name: install VPC
+      options:
+        name: "{{ vpc_name }}"
+        cidr_block: "{{ cidr_block }}"
+    - name: install subnets
+      options:
+        vpc_id: "{{ vpc_id }}"
+        cidr_blocks: "{{ subnet_cidr_blocks }}"
