@@ -1,0 +1,15 @@
+vpc_config:
+  provider: AWS
+  vars:
+    vpc_name: myVPC
+    cidr_block: 10.16.0.0/16
+    igw_name: myIGW
+  tasks:
+    - name: Create VPC
+      options:
+        name: "{{ igw_name }}"
+        vpc_id: "{{ vpc_id }}"
+    - name: attach Internet Gateway to VPC
+      options:
+        vpc_id: "{{ vpc_id }}"
+        igw_id: "{{ igw_id }}"
