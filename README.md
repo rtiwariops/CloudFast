@@ -6,7 +6,7 @@ The CloudFast Automation Framework is a powerful tool for automating your cloud 
 
 Accessible via API: The CloudFast Automation Framework can be easily integrated into your existing infrastructure and workflow, allowing you to automate tasks and manage resources through a simple API.
 
-YAML configuration: The framework uses YAML for configuration, making it easy to read and understand. You can also use YAML to define your automation tasks and resources.
+YAML configuration: The framework uses YAML for configuration,making it easy to read and understand. You can also use YAML to define your automation tasks and resources.
 
 Cloud-agnostic: The CloudFast Automation Framework is designed to work with any cloud provider, allowing you to easily manage and automate tasks across multiple cloud environments.
 
