@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
-from docs.redoc import setup_redoc
+from fastapi.responses import HTMLResponse
 from modules.vpc.vpc import router as vpc_router
 from modules.subnets.subnets import router as subnet_router
 from modules.igw.igw import router as igw_router
@@ -10,7 +10,6 @@ import uvicorn
 from fastapi import FastAPI
 
 app = FastAPI(redoc_url=None)
-setup_redoc(app)
 app.include_router(vpc_router)
 app.include_router(subnet_router)
 app.include_router(igw_router)
@@ -33,6 +32,13 @@ def custom_openapi():
 
 
 app.openapi = custom_openapi
+
+@app.get("/page")
+async def page():
+    with open("./docs/index.html", "r") as file:
+        content = file.read()
+        return HTMLResponse(content=content)
+
 
     
 if __name__ == '__main__':
